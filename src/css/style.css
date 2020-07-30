@@ -1,0 +1,61 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; }
+
+body {
+  font-family: sans-serif;
+  color: black;
+  font-weight: 300;
+  line-height: 1.6; }
+
+.container {
+  background: linear-gradient(to right, #5F9595, #C1D7D7);
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center; }
+
+.chatbox {
+  background-color: snow;
+  height: 100%;
+  width: 50vw;
+  grid-column: 2 / 3;
+  display: flex;
+  flex-direction: column; }
+  .chatbox--display {
+    margin: 1rem;
+    background-color: steelblue;
+    height: 60vh;
+    padding: 4rem;
+    font-size: 1.5rem;
+    font-family: sans-serif;
+    color: #fff; }
+    .chatbox--display_list {
+      list-style: none; }
+  .chatbox--controls {
+    height: 37vh;
+    background-color: tomato;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 2rem; }
+    .chatbox--controls > * {
+      border: none;
+      border-radius: 5px;
+      height: 5rem;
+      outline: none; }
+    .chatbox--controls_input {
+      width: 70%;
+      margin-right: 0.5rem;
+      padding: 0.5rem; }
+    .chatbox--controls_btn {
+      width: 15%;
+      cursor: pointer; }

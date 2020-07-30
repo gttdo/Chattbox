@@ -4,9 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// Redux
+import {createStore} from 'redux';
+// Connect Redux to React using React-redux
+import {Provider} from 'react-redux';
+// Reducers
+import commentsReducer from './store/reducers/commentsReducer';
+
+const store = createStore(commentsReducer);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}><App /></Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
