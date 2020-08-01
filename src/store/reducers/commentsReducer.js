@@ -1,17 +1,23 @@
-import * as actionTypes from '../actions';
+import * as actionTypes from '../actions/actionTypes';
 
 // Intial State
 const initialState = {
-    comments: []
+    comments: [],
+    flag: false
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type){
-        case actionTypes.ADD: 
+        case actionTypes.GET_COMMENTS: 
             return{
                 ...state,
                 comments: state.comments.concat({id: new Date(),value: action.comment})}
-        default: console.log("no changes");
+        case actionTypes.ADD:
+            return{
+                ...state,
+                flag: action.flag
+            }
+        default: console.log(null);
     }
     return state;
 }

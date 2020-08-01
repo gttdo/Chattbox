@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // Connect Component to Redux Store
 import { connect } from 'react-redux';
 // ActionTypes
-import * as actionTypes from '../../store/actions';
+import {add} from '../../store/actions/actionCreator';
 
 class Controls extends Component{
     state = {
@@ -50,7 +50,7 @@ class Controls extends Component{
 // Dispatch actions to reducer
 const mapDispatchToProps = dispatch => {
     return{
-        addComment: (comment) => dispatch({type: actionTypes.ADD, comment: comment})
+        addComment: (comment) => dispatch(add(comment, true))
     }
 }
 
