@@ -8,8 +8,7 @@ import axios from '../../axiosGlobal';
 
 class Display extends Component {
     state = {
-        comments: [],
-        flag: false
+        comments: []
     }
     retrieveComment = (commentID) =>{
         axios.get(`/comments/${commentID}.json`)
@@ -25,6 +24,7 @@ class Display extends Component {
             comments: this.state.comments.concat(comment)
         })
     }
+
     componentDidMount(){
             axios.get('/comments.json')
             .then(response => {

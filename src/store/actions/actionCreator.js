@@ -17,9 +17,9 @@ export const add = (comment, flag) => {
         .then(response => {
             console.log(response);
             // dispatch(saveComment(comment));
+            window.location.reload();
         })
         .catch(error => console.log(error))
-
         dispatch(raiseFlag(flag))
     }
 }
