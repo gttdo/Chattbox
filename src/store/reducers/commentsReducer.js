@@ -11,7 +11,7 @@ const reducer = (state = initialState, action) => {
         case actionTypes.GET_COMMENTS: 
             return{
                 ...state,
-                comments: state.comments.concat({id: new Date(),value: action.comment})}
+                comments: state.comments.concat({id: action.id, value: action.comment})}
         case actionTypes.ADD:
             return{
                 ...state,

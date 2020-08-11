@@ -6,42 +6,45 @@ import {connect} from 'react-redux';
 // AXIOS
 import axios from '../../axiosGlobal';
 
-class Display extends Component {
-    state = {
-        comments: []
-    }
-    retrieveComment = (commentID) =>{
-        axios.get(`/comments/${commentID}.json`)
-        .then(response => {
-            console.log(response.data.comment);
-            this.updateComments(response.data.comment)
-        })
-        .catch(error => console.log(error))
-    }
+// Action Creator
+import {getComments} from '../../store/actions/actionCreator';
 
-    updateComments = (comment) => {
-        this.setState({
-            comments: this.state.comments.concat(comment)
-        })
+class Display extends Component {
+    retrieveComment = (commentObj, commentIDsArr) =>{
+        for(let commentID of commentIDsArr){
+            axios.get(`/comments/${commentObj}.json`)
+            .then(response => {
+                this.props.getComments(response.data.comment, commentID)
+            })
+            .catch(error => console.log(error))
+        }
     }
 
     componentDidMount(){
-            axios.get('/comments.json')
-            .then(response => {
-                for(let comment in response.data){
-                    this.retrieveComment(comment)
-                }
-            })
-            .catch(error => console.log(error))
+        // let requestComments = setInterval(() => {
+        //     axios.get('/comments.json')
+        //     .then(response => {
+        //         for(let comment in response.data){
+        //                 let commentIDsArray = [...Object.getOwnPropertyNames(response.data)]
+        //                 this.retrieveComment(comment, commentIDsArray);
+        //         }
+        //     })
+        //     .catch(error => console.log(error))
+        // }, 2000);
     }
     
     render(){
+        let commentID = '';
+        let comment = this.props.cmt.map(comment => {
+            if (commentID !== comment.id){
+                console.log(comment.id)
+                return <li className="chatbox--display_list--item" key={comment.id}>{comment.value}</li>
+            }
+        })
         return(
             <div className="chatbox--display">
                 <ul className="chatbox--display_list">
-                    {this.state.comments.map(comment => (
-                        <li className="chatbox--display_list--item" key={comment}>{comment}</li>
-                    ))}
+                    {comment}
                 </ul>
             </div>
         )
@@ -55,9 +58,11 @@ const mapStateToProps = state => {
     };
 };
 
-// const mapDispacthToProps = dispatch => {
+const mapDispacthToProps = dispatch => {
+    return{
+        getComments: (comment, commentID) => dispatch(getComments(comment, commentID))
+    }
+}
 
-// }
-
-export default connect(mapStateToProps)(Display);
+export default connect(mapStateToProps, mapDispacthToProps)(Display);
 

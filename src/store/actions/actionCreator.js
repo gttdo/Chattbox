@@ -17,10 +17,18 @@ export const add = (comment, flag) => {
         .then(response => {
             console.log(response);
             // dispatch(saveComment(comment));
-            window.location.reload();
         })
         .catch(error => console.log(error))
         dispatch(raiseFlag(flag))
+    }
+}
+
+// Store comments from Server to Redux store
+export const getComments = (comment, commentID) => {
+    return {
+        type: actionTypes.GET_COMMENTS,
+        comment: comment,
+        id: commentID
     }
 }
 
